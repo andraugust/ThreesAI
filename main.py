@@ -24,6 +24,9 @@ def policy(D,kind=None):
     '''
     global force_taketwo
 
+    if kind is None:
+        exit('Error: please select a policy.')
+    
     # forced takes
     if len(D) == 1:
         return [0]
@@ -31,9 +34,7 @@ def policy(D,kind=None):
         force_taketwo = False
         return [0,1]
 
-    if kind is None:
-        exit('Error: please select a policy kind.')
-    elif kind == 'take_none':
+    if kind == 'take_none':
         return []
     elif kind == 'take_one':
         return [0]
@@ -50,8 +51,7 @@ force_taketwo = False
 while len(D) > 0:
     # roll
     print('Roll---------------')
-    D = roll_them(D)
-    D = np.sort(D)
+    D = np.sort(roll_them(D))
     print(D)
     # decide which dice to keep
     keeping = policy(D,kind='take_none')
